@@ -18,14 +18,14 @@ class User
 	private $realname; // User's real name
 	private $website;  // User's website
 	
-	/* Constructor method, takes result of mysql_fetch_row */
+	/* Constructor method, takes result of mysql_fetch_assoc */
 	function __construct($user)
 	{
-		$this->id       = $user['id'];
-		$this->username = $user['username'];
-		$this->password = $user['password'];
-		$this->realname = $user['realname'];
-		$this->website  = $user['website'];
+		$this->id       = $user["id"];
+		$this->username = $user["username"];
+		$this->password = $user["password"];
+		$this->realname = $user["realname"];
+		$this->website  = $user["website"];
 	}
 	
 	function update()

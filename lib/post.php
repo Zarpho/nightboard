@@ -17,16 +17,16 @@ class Post
 	private $edittime;  // Most recent time of editing (unset unless post has been edited)
 	private $edittotal; // Total times post has been edited
 	
-	/* Constructor method, takes result of mysql_fetch_row */
+	/* Constructor method, takes result of mysql_fetch_assoc */
 	function __construct($post)
 	{
-		$this->id       = $post['id'];
-		$this->username = $post['authorid'];
-		$this->password = $post['topicid'];
-		$this->realname = $post['message'];
-		$this->website  = $post['time'];
-		$this->realname = $post['edittime'];
-		$this->website  = $post['edittotal'];
+		$this->id       = $post["id"];
+		$this->username = $post["authorid"];
+		$this->password = $post["topicid"];
+		$this->realname = $post["message"];
+		$this->website  = $post["time"];
+		$this->realname = $post["edittime"];
+		$this->website  = $post["edittotal"];
 	}
 	
 	function update()
