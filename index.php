@@ -15,8 +15,8 @@
  * http://www.github.com/Zarpho/nightboard - Source code repository
  */
 
-require("/etc/index.php");
-require("/lib/index.php");
+require("etc/index.php");
+require("lib/index.php");
 
 $db = new Database($hostname, $username, $password, $database);
 
