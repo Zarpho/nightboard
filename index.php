@@ -20,9 +20,9 @@ require("lib/index.php");
 
 $db = new Database($hostname, $username, $password, $database);
 
-if (!mysqli_connect($db->hostname, $db->username, $db->password, $db->database))
+if (!mysql_connect($db->hostname, $db->username, $db->password, $db->database))
 {
-	die("Could not connect to MySQL database. Please make sure etc/db.php is configured correctly." . mysql_errno());
+	die("Could not connect to MySQL database. Please make sure etc/db.php is configured correctly. ~ " . mysql_error());
 }
 
 ?>
