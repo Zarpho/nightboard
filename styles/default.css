@@ -1,0 +1,23 @@
+﻿body, div, p, table, tbody, th, tr, td, ol, ul, li, img
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+#header
+{
+	margin: 16px;
+	width: 100%;
+}
+
+.title
+{
+	font-size: 16pt;
+	text-align: center;
+}
+
+.subtitle
+{
+	font-size: 12pt;
+	text-align: center;
+}

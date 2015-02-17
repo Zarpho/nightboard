@@ -25,4 +25,29 @@ if (!mysql_connect($db->hostname, $db->username, $db->password, $db->database))
 	die("Could not connect to MySQL database. Please make sure etc/db.php is configured correctly. ~ " . mysql_error());
 }
 
+$boardtitle = "Nightboard";
+
+echo <<<_END
+<html>
+	<head>
+		<title>$boardtitle - Index page</title>
+		<link rel="Stylesheet" type="text/css" href="styles/default.css" />
+	</head>
+	<body>
+		<table id="header">
+			<tbody>
+				<tr>
+					<td>
+						<p class="title">Nightboard</p>
+						<p class="subtitle">Version -1</p>
+					</td>
+				</tr>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+_END;
+
 ?>
