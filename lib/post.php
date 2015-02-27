@@ -15,7 +15,7 @@ class Post
 	private $message;   // Message content
 	private $time;      // Time of posting
 	private $edittime;  // Most recent time of editing (unset unless post has been edited)
-	private $edittotal; // Total times post has been edited
+	private $edittotal; // Total times post has been edited (unset unless post has been edited)
 	
 	/* Constructor method, takes result of mysql_fetch_assoc */
 	function __construct($post)

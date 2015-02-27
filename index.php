@@ -18,34 +18,68 @@
 require("etc/index.php");
 require("lib/index.php");
 
-$db = new Database($hostname, $username, $password, $database);
+$db     = new Database($hostname, $username, $password, $database);                   // Create a database object
+$mysqli = mysqli_connect($db->hostname, $db->username, $db->password, $db->database); // Connect to that database
 
-if (!mysql_connect($db->hostname, $db->username, $db->password, $db->database))
+if (!$mysqli)
 {
-	die("Could not connect to MySQL database. Please make sure etc/db.php is configured correctly. ~ " . mysql_error());
+	die("Could not connect to MySQL database. Please make sure etc/db.php is configured correctly. ~ " . mysqli_error());
 }
 
-$boardtitle = "Nightboard";
+mysqli_select_db($db->database);
+
+$boardtitle   = "Nightboard";
+$currentstyle = "default";
+
+$template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
+
+$query = mysqli_query($mysqli, "SELECT * FROM links");
+$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC));
 
 echo <<<_END
-<html>
-	<head>
-		<title>$boardtitle - Index page</title>
-		<link rel="Stylesheet" type="text/css" href="styles/default.css" />
-	</head>
-	<body>
-		<table id="header">
-			<tbody>
-				<tr>
-					<td>
-						<p class="title">Nightboard</p>
-						<p class="subtitle">Version -1</p>
-					</td>
-				</tr>
-				<tr>
-				</tr>
-			</tbody>
-		</table>
+
+		<div id="main">
+			<table id="main-table">
+				<tbody>
+_END;
+
+$query  = mysqli_query($mysqli, "SELECT * FROM forums");
+$forums = mysqli_fetch_all($query, MYSQL_ASSOC);
+
+foreach($forums as $forum)
+{	
+	$id          = $forum[id];
+	$name        = $forum[name];
+	$description = $forum[description];
+	$categoryid  = $forum[categoryid];
+	$threads     = $forum[threads];
+	$posts       = $forum[posts];
+	$latestid    = $forum[latestid];
+	
+	/* Begin preformatted section */
+	echo <<<_END
+
+					<tr>
+						<td class="forumname"><a title="$name" href="thread.php?id=$id">$name</a></td>
+						<td class="threadcount">Threads</td>
+						<td class="postcount">Posts</td>
+						<td class="latestpost">Latest post</td>
+					</tr>
+					<tr>
+						<td class="forumname">$description</td>
+						<td class="threadcount">$threads</td>
+						<td class="postcount">$posts</td>
+						<td class="latestpost">$latestid</td>
+					</tr>
+_END;
+	/* End preformatted section */
+}
+
+echo <<<_END
+
+				</tbody>
+			</table>
+		</div>
 	</body>
 </html>
 _END;

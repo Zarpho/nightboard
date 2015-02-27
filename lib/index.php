@@ -10,6 +10,7 @@
 /* Required classes. Nightboard will not function without these. */
 require("db.php");
 require("post.php");
+require("template.php");
 require("user.php");
 
 /* Include other classes here. */

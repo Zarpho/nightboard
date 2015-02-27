@@ -2,13 +2,37 @@
 {
 	margin: 0px;
 	padding: 0px;
+	border-spacing: 0px;
 }
 
 #header
 {
-	margin: 16px;
+	padding: 16px;
+}
+
+#header-table
+{
 	width: 100%;
 }
+
+#main
+{
+	padding: 16px;
+}
+
+#main-table
+{
+	width: 100%;
+	border-collapse: collapse;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+}
+
+	#main-table td
+	{
+		border: solid 1px #000000;
+		padding: 1px;
+	}
 
 .title
 {
@@ -20,4 +44,21 @@
 {
 	font-size: 12pt;
 	text-align: center;
+}
+
+.links
+{
+	text-align: center;
+}
+
+.threadcount, .postcount
+{
+	text-align: center;
+	width: 5%;
+}
+
+.latestpost
+{
+	text-align: center;
+	width: 15%;
 }
