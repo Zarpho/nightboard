@@ -1,4 +1,11 @@
-﻿body, div, p, table, tbody, th, tr, td, ol, ul, li, img
+﻿/* :: Nightboard ::
+ * 
+ * FILENAME:    styles/default.css
+ * AUTHOR(S):   Joey Miller ("Zarpho")
+ * DESCRIPTION: Stylesheet for the "Default" template.
+ */
+
+body, div, p, table, tbody, th, tr, td, ol, ul, li, img
 {
 	margin: 0px;
 	padding: 0px;
@@ -33,6 +40,14 @@
 		border: solid 1px #000000;
 		padding: 1px;
 	}
+
+#footer
+{
+	font-family: Arial, sans-serif;
+	font-size: 8pt;
+	padding: 16px;
+	text-align: center;
+}
 
 .title
 {

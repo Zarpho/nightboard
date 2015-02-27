@@ -31,6 +31,18 @@ class Template
 	{
 		include("styles/$this->directory/header.php");
 	}
+	
+	/* Generates main part of the page */
+	function main($type, $forums_array)
+	{
+		include("styles/$this->directory/main.$type.php");
+	}
+	
+	/* Generates page footer */
+	function footer($forums_array)
+	{
+		include("styles/$this->directory/footer.php");
+	}
 }
 
 ?>

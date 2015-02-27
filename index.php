@@ -36,52 +36,9 @@ $template = new Template(array(name => "default")); // NOT final, just temporary
 $query = mysqli_query($mysqli, "SELECT * FROM links");
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC));
 
-echo <<<_END
+$query = mysqli_query($mysqli, "SELECT * FROM forums");
+$template->main("index", mysqli_fetch_all($query, MYSQL_ASSOC));
 
-		<div id="main">
-			<table id="main-table">
-				<tbody>
-_END;
-
-$query  = mysqli_query($mysqli, "SELECT * FROM forums");
-$forums = mysqli_fetch_all($query, MYSQL_ASSOC);
-
-foreach($forums as $forum)
-{	
-	$id          = $forum[id];
-	$name        = $forum[name];
-	$description = $forum[description];
-	$categoryid  = $forum[categoryid];
-	$threads     = $forum[threads];
-	$posts       = $forum[posts];
-	$latestid    = $forum[latestid];
-	
-	/* Begin preformatted section */
-	echo <<<_END
-
-					<tr>
-						<td class="forumname"><a title="$name" href="thread.php?id=$id">$name</a></td>
-						<td class="threadcount">Threads</td>
-						<td class="postcount">Posts</td>
-						<td class="latestpost">Latest post</td>
-					</tr>
-					<tr>
-						<td class="forumname">$description</td>
-						<td class="threadcount">$threads</td>
-						<td class="postcount">$posts</td>
-						<td class="latestpost">$latestid</td>
-					</tr>
-_END;
-	/* End preformatted section */
-}
-
-echo <<<_END
-
-				</tbody>
-			</table>
-		</div>
-	</body>
-</html>
-_END;
+$template->footer();
 
 ?>
