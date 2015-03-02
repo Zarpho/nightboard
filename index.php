@@ -26,7 +26,7 @@ if (!$mysqli)
 	die("Could not connect to MySQL database. Please make sure etc/db.php is configured correctly. ~ " . mysqli_error());
 }
 
-mysqli_select_db($db->database);
+mysqli_select_db($mysqli, $db->database);
 
 $boardtitle   = "Nightboard";
 $currentstyle = "default";
