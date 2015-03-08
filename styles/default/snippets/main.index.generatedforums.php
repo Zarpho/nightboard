@@ -2,7 +2,10 @@
 
 /* :: Nightboard ::
  * 
- * 
+ * FILENAME:    styles/default/snippets/main.index.generatedforums.php
+ * AUTHOR(S):   Joey Miller "Zarpho"
+ * DESCRIPTION: Contains HTML snippet for the "generatedforums" variable used by main.index.php of
+ *              the "Default" template
  */
 
 $generatedforums .= <<<_END
