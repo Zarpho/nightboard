@@ -8,30 +8,15 @@
  */
 
 /* Variables */
-$forums     = generateforums($forums_array); // HTML data for forums displayed
-$forumshtml = <<<_END
-
-						<tr>
-							<td class="forumname"><a title="$name" href="thread.php?id=$id">$name</a></td>
-							<td class="threadcount">Threads</td>
-							<td class="postcount">Posts</td>
-							<td class="latestpost">Latest post</td>
-						</tr>
-						<tr>
-							<td class="forumname">$description</td>
-							<td class="threadcount">$threads</td>
-							<td class="postcount">$posts</td>
-							<td class="latestpost">$latestid</td>
-						</tr>
-_END;
+$forums = generateforums($forums_array, $forumshtml); // HTML data for forums displayed
 
 /* Functions */
-function generateforums($array)
-{
-	$generatedforums; // HTML data
+function generateforums($array, $html)
+{	
+	$generatedforums; // HTML data for forumlist
 	
 	foreach($array as $forum)
-	{	
+	{
 		$id          = $forum[id];
 		$name        = $forum[name];
 		$description = $forum[description];
@@ -40,7 +25,7 @@ function generateforums($array)
 		$posts       = $forum[posts];
 		$latestid    = $forum[latestid];
 	
-		$generatedforums .= $forumshtml;
+		include("snippets/main.index.generatedforums.php");
 	}
 	
 	$generatedforums = ltrim($generatedforums); // Trim whitespace from beginning of $generatedforums so HTML looks normal

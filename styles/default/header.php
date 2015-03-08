@@ -8,8 +8,8 @@
  */
 
 /* Variables */
-$links = generatelinks($links_array);
-$name  = $this->name;
+$links      = generatelinks($links_array);
+$stylesheet = $this->name;
 
 /* Functions */
 function generatelinks($array)
@@ -36,7 +36,7 @@ echo <<<_END
 <html>
 	<head>
 		<title>{$boardtitle} - Index page</title>
-		<link rel="Stylesheet" type="text/css" href="styles/{$this->name}.css" />
+		<link rel="Stylesheet" type="text/css" href="styles/{$stylesheet}.css" />
 		<meta charset="UTF-8" />
 	</head>
 	<body>
