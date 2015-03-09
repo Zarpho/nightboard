@@ -22,6 +22,12 @@ class Database
 		$this->password = $pass;
 		$this->database = $db;
 	}
+	
+	/* Connects to database and returns connection */
+	function connect()
+	{
+		return mysqli_connect($this->hostname, $this->username, $this->password, $this->database);
+	}
 }
 
 ?>

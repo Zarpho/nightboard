@@ -39,7 +39,7 @@ class Template
 	}
 	
 	/* Generates page footer */
-	function footer($forums_array)
+	function footer()
 	{
 		include("styles/$this->directory/footer.php");
 	}

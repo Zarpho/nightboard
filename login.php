@@ -2,17 +2,9 @@
 
 /* :: Nightboard ::
  * 
- * FILENAME:    index.php
+ * FILENAME:    login.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: The index page of the board, which displays all forums.
- */
-
-/* Welcome to Nightboard! This board software is meant to be simple and reminiscent of classic
- * messageboards of the past.
- * 
- * Here are some useful links:
- * http://board.midnightreality.net/       - The main website for Nightboard
- * http://www.github.com/Zarpho/nightboard - Source code repository
+ * DESCRIPTION: The page of the board where users can log in.
  */
 
 require("etc/index.php");
@@ -36,8 +28,22 @@ $template = new Template(array(name => "default")); // NOT final, just temporary
 $query = mysqli_query($mysqli, "SELECT * FROM links");
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC));
 
-$query = mysqli_query($mysqli, "SELECT * FROM forums");
-$template->main("index", mysqli_fetch_all($query, MYSQL_ASSOC));
+/* Check to see if the user entered all fields */
+if (isset($_POST[username]) and isset($_POST[password]))
+{
+	$entered = TRUE;
+}
+else
+{
+	$entered = FALSE;
+}
+
+/*if ($entered = TRUE)
+{
+	$query = "SELECT FROM users WHERE username='"
+}*/
+
+$template->main("login");
 
 $template->footer();
 
