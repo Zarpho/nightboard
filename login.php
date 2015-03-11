@@ -38,12 +38,21 @@ else
 	$entered = FALSE;
 }
 
-/*if ($entered = TRUE)
+if ($entered == TRUE)
 {
-	$query = "SELECT FROM users WHERE username='"
-}*/
+	$userquery = mysqli_query($mysqli, "SELECT * FROM users WHERE username=\"" . $_POST[username] . "\"");
+	$passquery = mysqli_query($mysqli, "SELECT * FROM users WHERE password=\"" . $_POST[password] . "\"");
+	
+	$userarray = mysqli_fetch_assoc($userquery);
+	$passarray = mysqli_fetch_assoc($passquery);
+	
+	if ($userarray['username'] == NULL or $passarray['password'] == NULL)
+		$message = "You have specified an incorrect username or password. Please try again.";
+	else
+		$message = "You have successfully logged in.";
+}
 
-$template->main("login");
+$template->main("login", $templatedata);
 
 $template->footer();
 
