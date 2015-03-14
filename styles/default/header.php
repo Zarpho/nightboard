@@ -54,6 +54,7 @@ echo <<<_END
 							<p class="links">
 								{$links}
 							</p>
+							<p class="links">You are logged in as {$currentuser->username}.</p>
 						</td>
 					</tr>
 				</tbody>

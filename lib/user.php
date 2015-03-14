@@ -10,22 +10,22 @@
 class User
 {
 	/* General account info */
-	private $id;       // User ID number
-	private $username; // Username
-	private $password; // User password
+	public $id;       // User ID number
+	public $username; // Username
+	public $password; // User password
 	
 	/* Personal info (optional) */
-	private $realname; // User's real name
-	private $website;  // User's website
+	public $realname; // User's real name
+	public $website;  // User's website
 	
-	/* Constructor method, takes result of mysql_fetch_assoc */
+	/* Constructor method, takes result of mysqli_fetch_assoc */
 	function __construct($user)
 	{
-		$this->id       = $user["id"];
-		$this->username = $user["username"];
-		$this->password = $user["password"];
-		$this->realname = $user["realname"];
-		$this->website  = $user["website"];
+		$this->id       = $user[id];
+		$this->username = $user[username];
+		$this->password = $user[password];
+		$this->realname = $user[realname];
+		$this->website  = $user[website];
 	}
 	
 	function update()

@@ -27,13 +27,13 @@ class Template
 	}
 	
 	/* Generates page header, takes various arguments for different parts of the header */
-	function header($boardtitle, $links_array)
+	function header($boardtitle, $links_array, $currentuser)
 	{
 		include("styles/$this->directory/header.php");
 	}
 	
 	/* Generates main part of the page */
-	function main($type, $forums_array)
+	function main($type, $templatedata)
 	{
 		include("styles/$this->directory/main.$type.php");
 	}

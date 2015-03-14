@@ -23,34 +23,45 @@ mysqli_select_db($mysqli, $db->database);
 $boardtitle   = "Nightboard";
 $currentstyle = "default";
 
+/* Check to see if the user entered all fields */
+if ($_POST[username] == "" xor $_POST[password] == "")
+{
+	$submitted   = TRUE;  // Has the form been submitted?
+	$allfields   = FALSE; // Have all required fields been filled out?
+	$credentials = FALSE; // Are login credentials correct?
+}
+elseif (isset($_POST[username]) and isset($_POST[password]))
+{
+	$submitted = TRUE;
+	$allfields = TRUE;
+	
+	$userquery = mysqli_query($mysqli, "SELECT * FROM users WHERE username=\"" . $_POST[username] . "\"");
+	$userarray = mysqli_fetch_assoc($userquery);
+	
+	if ($userarray['username'] == NULL or $userarray['password'] != $_POST[password])
+		$credentials = FALSE;
+	else
+		$credentials = TRUE;
+	
+	if ($credentials == TRUE)
+	{
+		header("Refresh: 5; URL=index.php");
+		setcookie("user", $userarray[id], time() + 60);
+	}
+}
+else
+{
+	$submitted   = FALSE;
+	$allfields   = FALSE;
+	$credentials = FALSE;
+}
+
+$templatedata = array("submitted" => $submitted, "allfields" => $allfields, "credentials" => $credentials);
+
 $template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
 
 $query = mysqli_query($mysqli, "SELECT * FROM links");
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC));
-
-/* Check to see if the user entered all fields */
-if (isset($_POST[username]) and isset($_POST[password]))
-{
-	$entered = TRUE;
-}
-else
-{
-	$entered = FALSE;
-}
-
-if ($entered == TRUE)
-{
-	$userquery = mysqli_query($mysqli, "SELECT * FROM users WHERE username=\"" . $_POST[username] . "\"");
-	$passquery = mysqli_query($mysqli, "SELECT * FROM users WHERE password=\"" . $_POST[password] . "\"");
-	
-	$userarray = mysqli_fetch_assoc($userquery);
-	$passarray = mysqli_fetch_assoc($passquery);
-	
-	if ($userarray['username'] == NULL or $passarray['password'] == NULL)
-		$message = "You have specified an incorrect username or password. Please try again.";
-	else
-		$message = "You have successfully logged in.";
-}
 
 $template->main("login", $templatedata);
 

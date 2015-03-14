@@ -8,10 +8,11 @@
  */
 
 /* Variables */
-$forums = generateforums($forums_array, $forumshtml); // HTML data for forums displayed
+$forums      = generateforums($templatedata[forums]); // HTML data for forums displayed
+$currentuser = $templatedata[currentuser];            // Data for current user
 
 /* Functions */
-function generateforums($array, $html)
+function generateforums($array)
 {	
 	$generatedforums; // HTML data for forumlist
 	
