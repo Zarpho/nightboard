@@ -2,17 +2,9 @@
 
 /* :: Nightboard ::
  * 
- * FILENAME:    index.php
+ * FILENAME:    logout.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: The index page of the board, which displays all forums.
- */
-
-/* Welcome to Nightboard! This board software is meant to be simple and reminiscent of classic
- * messageboards of the past.
- * 
- * Here are some useful links:
- * http://board.midnightreality.net/       - The main website for Nightboard
- * http://www.github.com/Zarpho/nightboard - Source code repository
+ * DESCRIPTION: The page of the board where users can log out.
  */
 
 require("etc/index.php");
@@ -36,10 +28,22 @@ if (isset($_SESSION[user]))
 	$array = mysqli_fetch_assoc($query);
 	
 	$currentuser = new User($array);
+	
+	$loggedin = TRUE;
+	
+	session_destroy();
 }
+else
+{
+	$loggedin = FALSE;
+}
+
+header("Refresh: 5; URL=index.php");
 
 $boardtitle   = "Nightboard";
 $currentstyle = "default";
+
+$templatedata = array("loggedin" => $loggedin);
 
 $template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
 
@@ -51,11 +55,7 @@ else
 $query = mysqli_query($mysqli, $linkquerystring);
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
-print_r($querystring);
-
-$query        = mysqli_query($mysqli, "SELECT * FROM forums");
-$templatedata = array("forums" => mysqli_fetch_all($query, MYSQL_ASSOC));
-$template->main("index", $templatedata);
+$template->main("logout", $templatedata);
 
 $template->footer();
 

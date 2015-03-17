@@ -20,8 +20,7 @@ if (!$mysqli)
 
 mysqli_select_db($mysqli, $db->database);
 
-$boardtitle   = "Nightboard";
-$currentstyle = "default";
+session_start();
 
 /* Check to see if the user entered all fields */
 if ($_POST[username] == "" xor $_POST[password] == "")
@@ -46,7 +45,8 @@ elseif (isset($_POST[username]) and isset($_POST[password]))
 	if ($credentials == TRUE)
 	{
 		header("Refresh: 5; URL=index.php");
-		setcookie("user", $userarray[id], time() + 60);
+		
+		$_SESSION[user] = $userarray[id];
 	}
 }
 else
@@ -56,12 +56,29 @@ else
 	$credentials = FALSE;
 }
 
+/* Check to see if user is already logged in */
+if (isset($_SESSION[user]))
+{
+	$query = mysqli_query($mysqli, "SELECT * FROM users WHERE id=\"" . $_SESSION[user] . "\"");
+	$array = mysqli_fetch_assoc($query);
+	
+	$currentuser = new User($array);
+}
+
+$boardtitle   = "Nightboard";
+$currentstyle = "default";
+
 $templatedata = array("submitted" => $submitted, "allfields" => $allfields, "credentials" => $credentials);
 
 $template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
 
-$query = mysqli_query($mysqli, "SELECT * FROM links");
-$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC));
+if (isset($currentuser))
+	$linkquerystring = "SELECT * FROM links WHERE (minlevel > 0 AND minlevel <= \"" . $currentuser->powerlevel . "\") OR minlevel IS NULL";
+else
+	$linkquerystring = "SELECT * FROM links WHERE minlevel = 0 OR minlevel IS NULL";
+
+$query = mysqli_query($mysqli, $linkquerystring);
+$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
 $template->main("login", $templatedata);
 
