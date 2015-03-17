@@ -2,17 +2,9 @@
 
 /* :: Nightboard ::
  * 
- * FILENAME:    index.php
+ * FILENAME:    memberlist.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: The index page of the board, which displays all forums.
- */
-
-/* Welcome to Nightboard! This board software is meant to be simple and reminiscent of classic
- * messageboards of the past.
- * 
- * Here are some useful links:
- * http://board.midnightreality.net/       - The main website for Nightboard
- * http://www.github.com/Zarpho/nightboard - Source code repository
+ * DESCRIPTION: The memberlist page of the board, which displays all members.
  */
 
 require("etc/index.php");
@@ -51,9 +43,9 @@ else
 $query = mysqli_query($mysqli, $linkquerystring);
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
-$query        = mysqli_query($mysqli, "SELECT * FROM forums");
-$templatedata = array("forums" => mysqli_fetch_all($query, MYSQL_ASSOC));
-$template->main("index", $templatedata);
+$query        = mysqli_query($mysqli, "SELECT id, username, email, powerlevel, website FROM users");
+$templatedata = array("memberlist" => mysqli_fetch_all($query, MYSQL_ASSOC));
+$template->main("memberlist", $templatedata);
 
 $template->footer();
 

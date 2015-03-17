@@ -10,9 +10,11 @@
 class User
 {
 	/* General account info */
-	public $id;       // User ID number
-	public $username; // Username
-	public $password; // User password
+	public $id;         // User ID number
+	public $username;   // Username
+	public $password;   // User password
+	public $email;      // Email address
+	public $powerlevel; // Powerlevel, see documentation for more info
 	
 	/* Personal info (optional) */
 	public $realname; // User's real name
@@ -21,11 +23,13 @@ class User
 	/* Constructor method, takes result of mysqli_fetch_assoc */
 	function __construct($user)
 	{
-		$this->id       = $user[id];
-		$this->username = $user[username];
-		$this->password = $user[password];
-		$this->realname = $user[realname];
-		$this->website  = $user[website];
+		$this->id         = $user[id];
+		$this->username   = $user[username];
+		$this->password   = $user[password];
+		$this->email      = $user[email];
+		$this->powerlevel = $user[powerlevel];
+		$this->realname   = $user[realname];
+		$this->website    = $user[website];
 	}
 	
 	function update()
