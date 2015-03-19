@@ -39,10 +39,21 @@ echo <<<_END
 						<td>
 							<p>{$message}</p>
 							<form method="post" action="login.php">
-								Username: <input type="text" name="username" size="15" maxlength="15" /><br />
-								Password: <input type="password" name="password" size="15" maxlength="15" /><br />
-								<br />
-								<input type="submit" value="Login" />
+								<table id="form-table">
+									<tbody>
+										<tr>
+											<td>Username:</td>
+											<td><input type="text" name="username" size="15" maxlength="15" /></td>
+										</tr>
+										<tr>
+											<td>Password:</td>
+											<td><input type="password" name="password" size="15" maxlength="15" /></td>
+										</tr>
+										<tr>
+											<td class="center" colspan="2"><input type="submit" value="Login" /></td>
+										</tr>
+									</tbody>
+								</table>
 							</form>
 						</td>
 					</tr>

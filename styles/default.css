@@ -38,7 +38,7 @@ body, div, p, table, tbody, th, tr, td, ol, ul, li, img
 	#main-table td
 	{
 		border: solid 1px #000000;
-		padding: 1px;
+		padding: 2px;
 	}
 
 #footer
@@ -48,6 +48,22 @@ body, div, p, table, tbody, th, tr, td, ol, ul, li, img
 	padding: 16px;
 	text-align: center;
 }
+
+#form-table
+{
+	border-collapse: collapse;
+	margin: auto;
+}
+
+	#form-table td
+	{
+		border: none;
+	}
+
+	#form-table .center
+	{
+		text-align: center;
+	}
 
 .title
 {
@@ -75,5 +91,21 @@ body, div, p, table, tbody, th, tr, td, ol, ul, li, img
 .latestpost
 {
 	text-align: center;
+	width: 15%;
+}
+
+.table-heading
+{
+	font-weight: bold;
+}
+
+.cell-05 
+{
+	width: 5%;
+	text-align: center;
+}
+
+.cell-15 
+{
 	width: 15%;
 }

@@ -39,7 +39,7 @@ echo <<<_END
 			<table id="main-table">
 				<tbody>
 					<tr>
-						<td>Members</td>
+						<td class="table-heading" colspan="4">Members</td>
 					</tr>
 					{$memberlist}
 				</tbody>
