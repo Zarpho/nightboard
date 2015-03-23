@@ -11,6 +11,11 @@
 $links      = generatelinks($links_array);
 $stylesheet = $this->name;
 
+if (isset($currentuser->username))
+	$message = "You are logged in as <a href=\"memberlist.php?id=$currentuser->id\">$currentuser->username</a>.";
+else
+	$message = "You are not logged in.";
+
 /* Functions */
 function generatelinks($array)
 {
@@ -54,7 +59,7 @@ echo <<<_END
 							<p class="links">
 								{$links}
 							</p>
-							<p class="links">You are logged in as {$currentuser->username}.</p>
+							<p class="links">{$message}</p>
 						</td>
 					</tr>
 				</tbody>

@@ -10,6 +10,7 @@
 require("etc/index.php");
 require("lib/index.php");
 
+/* Connect to database, test connection, select database */
 $db     = new Database($hostname, $username, $password, $database); // Create a database object
 $mysqli = $db->connect();                                           // Connect to that database
 
@@ -20,6 +21,7 @@ if (!$mysqli)
 
 mysqli_select_db($mysqli, $db->database);
 
+/* Handle sessions/users */
 session_start();
 
 if (isset($_SESSION[user]))
@@ -35,11 +37,13 @@ $currentstyle = "default";
 
 $template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
 
+/* Make SQL query for link section based on user's powerlevel */
 if (isset($currentuser))
 	$linkquerystring = "SELECT * FROM links WHERE (minlevel > 0 AND minlevel <= \"" . $currentuser->powerlevel . "\") OR minlevel IS NULL";
 else
 	$linkquerystring = "SELECT * FROM links WHERE minlevel = 0 OR minlevel IS NULL";
 
+/* Generate page */
 $query = mysqli_query($mysqli, $linkquerystring);
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
