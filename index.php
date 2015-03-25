@@ -45,14 +45,8 @@ $currentstyle = "default";
 
 $template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
 
-/* Make SQL query for link section based on user's powerlevel */
-if (isset($currentuser))
-	$linkquerystring = "SELECT * FROM links WHERE (minlevel > 0 AND minlevel <= \"" . $currentuser->powerlevel . "\") OR minlevel IS NULL";
-else
-	$linkquerystring = "SELECT * FROM links WHERE minlevel = 0 OR minlevel IS NULL";
-
 /* Generate page */
-$query = mysqli_query($mysqli, $linkquerystring);
+$query = mysqli_query($mysqli, $db->linkquerystring($currentuser->powerlevel));
 $template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
 $query        = mysqli_query($mysqli, "SELECT * FROM forums");
