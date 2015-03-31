@@ -67,19 +67,23 @@ if (isset($_SESSION[user]))
 	$currentuser = new User($array);
 }
 
-$boardtitle   = "Nightboard";
-$currentstyle = "default";
+$boardtitle = "Nightboard";
 
-$templatedata = array("submitted" => $submitted, "allfields" => $allfields, "credentials" => $credentials);
-
-$template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
+$styledata = array("submitted" => $submitted, "allfields" => $allfields, "credentials" => $credentials);
 
 /* Generate page */
+if (isset($currentuser))
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="' . $currentuser->style . '"');
+else
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="default"');
+	
+$style = new Style(mysqli_fetch_assoc($query));
+
 $query = mysqli_query($mysqli, $db->linkquerystring($currentuser->powerlevel));
-$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
+$style->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
-$template->main("login", $templatedata);
+$style->main("login", $styledata);
 
-$template->footer();
+$style->footer();
 
 ?>
