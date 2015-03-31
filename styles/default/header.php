@@ -4,12 +4,12 @@
  * 
  * FILENAME:    styles/default/header.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: Contains data for the header portion of the "Default" template.
+ * DESCRIPTION: Contains data for the header portion of the "Default" style.
  */
 
 /* Variables */
 $links      = generatelinks($links_array);
-$stylesheet = $this->name;
+$stylesheet = $this->directory;
 
 if (isset($currentuser->username))
 	$message = "You are logged in as <a href=\"memberlist.php?id=$currentuser->id\">$currentuser->username</a>.";

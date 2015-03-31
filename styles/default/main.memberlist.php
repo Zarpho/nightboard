@@ -4,14 +4,23 @@
  * 
  * FILENAME:    styles/default/main.memberlist.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: Contains data for the memberlist page portion of the "Default" template.
+ * DESCRIPTION: Contains data for the memberlist page portion of the "Default" style.
  */
 
 /* Variables */
-$memberlist  = generatememberlist($templatedata[memberlist]); // HTML data for memberlist displayed
-$currentuser = $templatedata[currentuser];                    // Data for current user
+$currentuser = $styledata[currentuser]; // Data for current user
+
+if ($styledata[pagemode] == "memberlist")
+	$pagedata = generatememberlist($styledata[pagedata]); // HTML data for memberlist displayed
+else
+	$pagedata = generatememberinfo($styledata[pagedata]); // HTML data for member profile displayed
 
 /* Functions */
+function generatememberinfo($array)
+{
+
+}
+
 function generatememberlist($array)
 {	
 	$generatedmemberlist; // HTML data for memberlist
@@ -41,7 +50,7 @@ echo <<<_END
 					<tr>
 						<td class="table-heading" colspan="4">Members</td>
 					</tr>
-					{$memberlist}
+					{$pagedata}
 				</tbody>
 			</table>
 		</div>

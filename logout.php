@@ -37,19 +37,23 @@ else
 
 header("Refresh: 5; URL=index.php");
 
-$boardtitle   = "Nightboard";
-$currentstyle = "default";
+$boardtitle = "Nightboard";
 
-$templatedata = array("loggedin" => $loggedin);
-
-$template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
+$styledata = array("loggedin" => $loggedin);
 
 /* Generate page */
+if (isset($currentuser))
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="' . $currentuser->style . '"');
+else
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="default"');
+	
+$style = new Style(mysqli_fetch_assoc($query));
+
 $query = mysqli_query($mysqli, $db->linkquerystring($currentuser->powerlevel));
-$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
+$style->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
-$template->main("logout", $templatedata);
+$style->main("logout", $styledata);
 
-$template->footer();
+$style->footer();
 
 ?>

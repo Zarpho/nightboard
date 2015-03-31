@@ -4,11 +4,11 @@
  * 
  * FILENAME:    styles/default/main.logout.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: Contains data for the logout page portion of the "Default" template.
+ * DESCRIPTION: Contains data for the logout page portion of the "Default" style.
  */
 
 /* Variables */
-$loggedin = $templatedata[loggedin]; // Is the user logged in?
+$loggedin = $styledata[loggedin]; // Is the user logged in?
 
 if ($loggedin == TRUE)
 	$message = "You have successfully logged out.";

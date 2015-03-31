@@ -32,19 +32,33 @@ if (isset($_SESSION[user]))
 	$currentuser = new User($array);
 }
 
-$boardtitle   = "Nightboard";
-$currentstyle = "default";
-
-$template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
+$boardtitle = "Nightboard";
 
 /* Generate page */
+if (isset($currentuser))
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="' . $currentuser->style . '"');
+else
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="default"');
+	
+$style = new Style(mysqli_fetch_assoc($query));
+
 $query = mysqli_query($mysqli, $db->linkquerystring($currentuser->powerlevel));
-$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
+$style->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
-$query        = mysqli_query($mysqli, "SELECT id, username, email, powerlevel, website FROM users");
-$templatedata = array("memberlist" => mysqli_fetch_all($query, MYSQL_ASSOC));
-$template->main("memberlist", $templatedata);
+if (!isset($_GET[id]))
+{
+	$pagemode = "memberlist";
+	$pagedata = mysqli_fetch_all(mysqli_query($mysqli, 'SELECT id, username, email, powerlevel, website FROM users'), MYSQL_ASSOC);
+}
+else
+{
+	$pagemode = "memberinfo";
+	$pagedata = mysqli_fetch_assoc(mysqli_query($mysqli, 'SELECT * FROM users WHERE id="' . $_GET[id] . '"'));
+}
 
-$template->footer();
+$styledata = array("pagemode" => $pagemode, "pagedata" => $pagedata);
+$style->main("memberlist", $styledata);
+
+$style->footer();
 
 ?>

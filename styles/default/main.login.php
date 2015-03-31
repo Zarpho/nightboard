@@ -4,13 +4,13 @@
  * 
  * FILENAME:    styles/default/main.login.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: Contains data for the login page portion of the "Default" template.
+ * DESCRIPTION: Contains data for the login page portion of the "Default" style.
  */
 
 /* Variables */
-$submitted   = $templatedata[submitted];   // Has the form been submitted?
-$allfields   = $templatedata[allfields];   // Have all required fields been filled out?
-$credentials = $templatedata[credentials]; // Are login credentials correct?
+$submitted   = $styledata[submitted];   // Has the form been submitted?
+$allfields   = $styledata[allfields];   // Have all required fields been filled out?
+$credentials = $styledata[credentials]; // Are login credentials correct?
 
 if ($submitted == TRUE)
 {

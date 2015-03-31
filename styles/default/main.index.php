@@ -4,12 +4,12 @@
  * 
  * FILENAME:    styles/default/main.index.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: Contains data for the index page portion of the "Default" template.
+ * DESCRIPTION: Contains data for the index page portion of the "Default" style.
  */
 
 /* Variables */
-$forums      = generateforums($templatedata[forums]); // HTML data for forums displayed
-$currentuser = $templatedata[currentuser];            // Data for current user
+$forums      = generateforums($styledata[forums]); // HTML data for forums displayed
+$currentuser = $styledata[currentuser];            // Data for current user
 
 /* Functions */
 function generateforums($array)

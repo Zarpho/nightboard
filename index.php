@@ -34,25 +34,29 @@ session_start();
 
 if (isset($_SESSION[user]))
 {
-	$query = mysqli_query($mysqli, "SELECT * FROM users WHERE id=\"" . $_SESSION[user] . "\"");
+	$query = mysqli_query($mysqli, 'SELECT * FROM users WHERE id="' . $_SESSION[user] . '"');
 	$array = mysqli_fetch_assoc($query);
 	
 	$currentuser = new User($array);
 }
 
-$boardtitle   = "Nightboard";
-$currentstyle = "default";
-
-$template = new Template(array(name => "default")); // NOT final, just temporary replacement for query
+$boardtitle = "Nightboard";
 
 /* Generate page */
+if (isset($currentuser))
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="' . $currentuser->style . '"');
+else
+	$query = mysqli_query($mysqli, 'SELECT * FROM styles WHERE name="default"');
+	
+$style = new Style(mysqli_fetch_assoc($query));
+
 $query = mysqli_query($mysqli, $db->linkquerystring($currentuser->powerlevel));
-$template->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
+$style->header($boardtitle, mysqli_fetch_all($query, MYSQL_ASSOC), $currentuser);
 
 $query        = mysqli_query($mysqli, "SELECT * FROM forums");
-$templatedata = array("forums" => mysqli_fetch_all($query, MYSQL_ASSOC));
-$template->main("index", $templatedata);
+$styledata = array("forums" => mysqli_fetch_all($query, MYSQL_ASSOC));
+$style->main("index", $styledata);
 
-$template->footer();
+$style->footer();
 
 ?>

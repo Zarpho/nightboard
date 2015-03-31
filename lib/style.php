@@ -2,28 +2,22 @@
 
 /* :: Nightboard ::
  * 
- * FILENAME:    lib/template.php
+ * FILENAME:    lib/style.php
  * AUTHOR(S):   Joey Miller ("Zarpho")
- * DESCRIPTION: Contains data for the Template class.
+ * DESCRIPTION: Contains data for the Style class.
  */
 
-class Template
+class Style
 {
-	/* Template information */
-	public $name;      // The template's name
-	public $directory; // The template's directory
+	/* Style information */
+	public $name;      // The style's name
+	public $directory; // The style's directory
 	
 	/* Constructor method, takes result of query */
-	function __construct($template)
+	function __construct($style)
 	{
-		$this->name      = $template[name];
-		$this->directory = strtolower($template[name]);
-		
-		/* Set the directory name if it's different from the template name */
-		if (isset($template[directory]))
-		{
-			$this->directory = $template[directory];
-		}
+		$this->name      = $style[name];
+		$this->directory = $style[directory];
 	}
 	
 	/* Generates page header, takes various arguments for different parts of the header */
@@ -33,7 +27,7 @@ class Template
 	}
 	
 	/* Generates main part of the page */
-	function main($type, $templatedata)
+	function main($type, $styledata)
 	{
 		include("styles/$this->directory/main.$type.php");
 	}

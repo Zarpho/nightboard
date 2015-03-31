@@ -16,6 +16,9 @@ class User
 	public $email;      // Email address
 	public $powerlevel; // Powerlevel, see documentation for more info
 	
+	/* Board settings */
+	public $style; // The user's preferred style
+	
 	/* Personal info (optional) */
 	public $realname; // User's real name
 	public $website;  // User's website
@@ -28,14 +31,9 @@ class User
 		$this->password   = $user[password];
 		$this->email      = $user[email];
 		$this->powerlevel = $user[powerlevel];
+		$this->style      = $user[style];
 		$this->realname   = $user[realname];
 		$this->website    = $user[website];
-	}
-	
-	function update()
-	{
-		// Connect to MySQL
-		// Set all other variables based on $id
 	}
 }
 
